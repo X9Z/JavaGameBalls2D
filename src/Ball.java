@@ -178,7 +178,7 @@ public class Ball {
     public void drawBall(Graphics2D g2) {
         g2.setColor(color);
         g2.fillOval(x_pos - radius, y_pos - radius, 2 * radius, 2 * radius);
-        g2.setColor(Color.GREEN);
+        g2.setColor(Color.BLACK);
 
 
         // Draw Text At The Center
