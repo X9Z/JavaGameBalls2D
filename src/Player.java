@@ -1,9 +1,10 @@
 public class Player {
-    //instances variables
+    // Player Lives
     private int lives;
+    // Player Score
     private int score;
 
-    //constructor
+    // constructor
     public Player() {
         lives = 10;
         score = 0;

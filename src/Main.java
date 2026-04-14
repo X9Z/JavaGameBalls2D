@@ -1,27 +1,38 @@
-
 import javax.swing.*;
-import java.awt.*;
 
 void main() {
-    Game game = new Game(Toolkit.getDefaultToolkit().getScreenSize());
-    JFrame jFrame = new JFrame("GAME YAY!");
-    jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    jFrame.add(game);
-    jFrame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-    jFrame.setVisible(true);
+
+    // FPS
+    AtomicInteger fps = new AtomicInteger();
+    GameFrame game = new GameFrame();
+    // Initialize The Game
     game.init();
+    // Start The Game
     game.start();
 
+    // Run The Game
     new Thread(() -> {
-        boolean play = true;
-        while (play){
-            play = game.startGame();
+        while (game.runGame()){
+            game.runGame();
             try {
-                Thread.sleep(15);
+                Thread.sleep(game.getSpeed());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
     }).start();
 
+
+    // NOTE: SHOWS 30+ FPS!
+    // Generate Frames
+    new Timer(0, e -> {
+        fps.addAndGet(game.generateFrames());
+    }).start();
+
+
+    // Set FPS
+    new Timer(1000, e -> {
+        game.setFps(fps.get());
+        fps.set(0);
+    }).start();
 }

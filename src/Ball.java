@@ -22,13 +22,13 @@ public class Ball {
 
     private String name;
     //instance final variables
-    private final int x_leftout = 25;
-    private final int x_rightout = 1330;
+    private int x_leftout = 30;
+    private int x_rightout = 1366 - 30;
     private int y_upout = 350;
-    private final int y_downout = 660;
+    private int y_downout = 768 - 30;
 
     private final int diff_factor = 30;
-    //referrnce variables
+    //reference variables
     Color color;
     private Random rand = new Random();
     //object initiation
@@ -37,7 +37,7 @@ public class Ball {
 
 
     //constructor
-    public Ball(int rad, int x, int y, int xv, int yv, int mv, Color color, Player player, String nm, Rectangle[] rect) {
+    public Ball(int rad, int x, int y, int xv, int yv, int mv, Color color, Player player, String nm, Rectangle[] rect, Dimension dimension) {
         this.radius = rad;
 
         x_pos = x;
@@ -56,6 +56,9 @@ public class Ball {
         this.player = player;
         this.rect = rect;
 
+        x_rightout = dimension.width - 30;
+        y_upout = 350;
+        y_downout = dimension.height - 80;
     }
 
     //ball movement
