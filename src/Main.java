@@ -2,7 +2,7 @@ import javax.swing.*;
 
 void main() {
 
-    // FPS
+    // FPS holder
     AtomicInteger fps = new AtomicInteger();
     GameFrame game = new GameFrame();
     // Initialize The Game
@@ -23,14 +23,17 @@ void main() {
     }).start();
 
 
+    // Set to "0"  means max fps by the device
+    // Set to 16 for around 60 fps if device can produce
     // NOTE: SHOWS 30+ FPS!
     // Generate Frames
-    new Timer(0, e -> {
+    int fpsLimit = 60;
+    new Timer(1000/fpsLimit, e -> {
         fps.addAndGet(game.generateFrames());
     }).start();
 
 
-    // Set FPS
+    // SHOW FPS on the SCREEN
     new Timer(1000, e -> {
         game.setFps(fps.get());
         fps.set(0);

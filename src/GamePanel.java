@@ -8,6 +8,7 @@ import java.util.Random;
 public class GamePanel extends JPanel {
     // Keep The Thread Running if True
     private volatile boolean running = true;
+    private boolean antiAliasingEnabled = false;
 
     private int speed;
     private int fps = 0;
@@ -104,14 +105,16 @@ public class GamePanel extends JPanel {
 
         // Anti-Aliasing
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        if (isAntiAliasingEnabled()){
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+                    RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                    RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        }
 
         if (player != null && player.getLives() > 0) {
             g2.setColor(Color.BLUE);
@@ -190,4 +193,12 @@ public class GamePanel extends JPanel {
         this.fps = fps;
     }
 
+    // Set Anti Aliasing
+    public boolean isAntiAliasingEnabled() {
+        return antiAliasingEnabled;
+    }
+    // Get Anti Aliasing
+    public void setAntiAliasingEnabled(boolean antiAliasingEnabled) {
+        this.antiAliasingEnabled = antiAliasingEnabled;
+    }
 }

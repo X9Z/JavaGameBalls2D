@@ -6,7 +6,7 @@ public class GameFrame extends JFrame {
     private GamePanel gamePanel;
 
     public GameFrame(){
-        dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        dimension = new Dimension(1366, 768);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("GAME YAY!");
         setSize(dimension);
@@ -30,24 +30,38 @@ public class GameFrame extends JFrame {
         controlFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         controlFrame.setAlwaysOnTop(true);
 
+        JButton setAntiAliasingJButton = new JButton(gamePanel.isAntiAliasingEnabled()? "Disable anti aliasing" : "Enable anti aliasing");
+        setAntiAliasingJButton.addActionListener(actionEvent -> {
+            if (gamePanel.isAntiAliasingEnabled()){
+                gamePanel.setAntiAliasingEnabled(false);
+                setAntiAliasingJButton.setText("Enable anti aliasing");
+            } else if (!gamePanel.isAntiAliasingEnabled()) {
+                gamePanel.setAntiAliasingEnabled(true);
+                setAntiAliasingJButton.setText("Disable anti aliasing");
+            }
+        });
+
+
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.PAGE_AXIS));
         //controlPanel.setSize(dimension.width, 70);
 
 
-        JTextField jTextField = new JTextField("Speed Delay: " + getSpeed() + " ms");
+        JTextField jTextField = new JTextField("Speed Delay: " + getSpeed() + "ms");
         //jTextField.setSize(dimension.width, 30);
 
         slider.addChangeListener(e -> {
             int value = slider.getValue();
             setSpeed(value);
-            jTextField.setText("Speed Delay: " + getSpeed() + " ms");
+            jTextField.setText("Speed Delay: " + getSpeed() + "ms");
         });
 
         controlFrame.add(controlPanel);
         controlPanel.add(jTextField);
         controlPanel.add(slider);
+        controlPanel.add(setAntiAliasingJButton);
 
+        setAntiAliasingJButton.setVisible(true);
         controlPanel.setVisible(true);
         jTextField.setVisible(true);
         slider.setVisible(true);

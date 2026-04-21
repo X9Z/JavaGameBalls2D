@@ -3,9 +3,9 @@ import java.awt.*;
 import java.util.Random;
 
 public class Rectangle {
-    private Dimension screenDimension = new Dimension(1366, 768);
+    private Dimension screenDimension;
     Random rand = new Random();
-    private String[] str = {"0_0", ">_<", "-_-", "P_P", "q_q", "6.6", "*_*", "0.o", "^.^"};
+    private String[] str = {"0_0", ">_<", "-_-", "P_P", "q_q", "6.6", "*_*", "0.o", "!_!"};
     private int randomX;
     private int randomY;
 
@@ -41,14 +41,14 @@ public class Rectangle {
             randomY = rand.nextInt(30) % 30;
             impression = str[x];
             score_available = true;
-            moving_x_val = 3;
+            moving_x_val = rand.nextInt(4) + 2; // Random 2 to 5 steps
         } else if (x_pos >= (screenDimension.width - 64)) {
             int x = rand.nextInt(3) % 3;
             randomX = rand.nextInt(30) % 30;
             randomY = rand.nextInt(30) % 30;
             impression = str[x];
             score_available = true;
-            moving_x_val = -3;
+            moving_x_val = rand.nextInt(4) - 5; // Random -5 to -2 steps
         }
     }
 
