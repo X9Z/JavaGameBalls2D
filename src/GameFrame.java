@@ -16,7 +16,6 @@ public class GameFrame extends JFrame {
     public void init(){
         gamePanel = new GamePanel(dimension);
         gamePanel.setSize(dimension);
-        gamePanel.setBackground(Color.BLACK);
         gamePanel.setupUI();
         add(gamePanel);
         gamePanel.setVisible(true);

@@ -35,7 +35,7 @@ public class GamePanel extends JPanel {
 
         setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
         setFont(new Font("Times New Roman", Font.BOLD, 20));
-        setBackground(Color.BLACK);
+        setBackground(Color.decode("#212533"));
 
         addMouseListener(new MouseAdapter() {
             @Override
